@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.java.mapper.CourseMapper">
+
+    <select id="getDiscoveryGoods" resultType="Coursetable" parameterType="String">
+        SELECT * FROM coursetable WHERE coursetotallabel = #{0} order by rand() limit 8
+    </select>
+
+<!--
+大于：&gt;
+
+小于：&lt;
+
+大于等于：&gt;=
+
+小于等于：&lt;=
+-->
+
+    <!--所有搜索的课程-->
+    <select id="getAllSearchCourse" resultType="Coursetable" parameterType="HashMap">
+        SELECT * FROM coursetable WHERE coursetitle LIKE '%${searchText}%' AND coursesourse in
+        <foreach item="item" collection="searchwebsite"  open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        LIMIT ${curpage}, ${pagesize}
+    </select>
+
+    <!--所有搜索的课程按价格从低到高排序-->
+    <select id="getAllSearchCoursePirceASC" resultType="Coursetable" parameterType="HashMap">
+        SELECT * FROM coursetable WHERE coursetitle LIKE '%${searchText}%' AND coursesourse in
+        <foreach item="item" collection="searchwebsite"  open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        ORDER BY courseprice
+        LIMIT ${curpage}, ${pagesize}
+    </select>
+
+    <!--所有搜索的课程按价格从高到低排序-->
+    <select id="getAllSearchCoursePirceDESC" resultType="Coursetable" parameterType="HashMap">
+        SELECT * FROM coursetable WHERE coursetitle LIKE '%${searchText}%' AND coursesourse in
+        <foreach item="item" collection="searchwebsite"  open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        ORDER BY courseprice DESC
+        LIMIT ${curpage}, ${pagesize}
+    </select>
+
+    <!--所有搜索的课程按销量从高到低排序-->
+    <select id="getAllSearchCoursePopularDESC" resultType="Coursetable" parameterType="HashMap">
+        SELECT * FROM coursetable WHERE coursetitle LIKE '%${searchText}%' AND coursesourse in
+        <foreach item="item" collection="searchwebsite"  open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        ORDER BY coursenumber DESC
+        LIMIT ${curpage}, ${pagesize}
+    </select>
+
+
+    <select id="getAllSearchCourseFree" resultType="Coursetable" parameterType="HashMap">
+        SELECT * FROM coursetable WHERE coursetitle LIKE '%${searchText}%' AND courseprice = 0
+        AND  coursesourse in
+        <foreach item="item" collection="searchwebsite"  open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        LIMIT ${curpage}, ${pagesize}
+    </select>
+
+
+    <select id="getAllSearchCourseFreePopular" resultType="Coursetable" parameterType="HashMap">
+        SELECT * FROM coursetable WHERE coursetitle LIKE '%${searchText}%' AND courseprice = 0
+        AND  coursesourse in
+        <foreach item="item" collection="searchwebsite"  open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        ORDER BY coursenumber DESC
+        LIMIT ${curpage}, ${pagesize}
+    </select>
+
+    <select id="getAllSearchCourseCost" resultType="Coursetable" parameterType="HashMap">
+        SELECT * FROM coursetable WHERE coursetitle LIKE '%${searchText}%' AND courseprice &gt; 0
+        AND  coursesourse in
+        <foreach item="item" collection="searchwebsite"  open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        LIMIT ${curpage}, ${pagesize}
+    </select>
+
+
+    <select id="getAllSearchCourseCostPriceASC" resultType="Coursetable" parameterType="HashMap">
+        SELECT * FROM coursetable WHERE coursetitle LIKE '%${searchText}%' AND courseprice &gt; 0
+        AND  coursesourse in
+        <foreach item="item" collection="searchwebsite"  open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        ORDER BY courseprice
+        LIMIT ${curpage}, ${pagesize}
+    </select>
+
+
+    <select id="getAllSearchCourseCostPriceDESC" resultType="Coursetable" parameterType="HashMap">
+        SELECT * FROM coursetable WHERE coursetitle LIKE '%${searchText}%' AND courseprice &gt; 0
+        AND  coursesourse in
+        <foreach item="item" collection="searchwebsite"  open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        ORDER BY courseprice DESC
+        LIMIT ${curpage}, ${pagesize}
+    </select>
+
+
+    <select id="getAllSearchCourseCostPopular" resultType="Coursetable" parameterType="HashMap">
+        SELECT * FROM coursetable WHERE coursetitle LIKE '%${searchText}%' AND courseprice &gt; 0
+        AND  coursesourse in
+        <foreach item="item" collection="searchwebsite"  open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        ORDER BY coursenumber DESC
+        LIMIT ${curpage}, ${pagesize}
+    </select>
+
+
+    <select id="getAllSearchCourseInterVal" resultType="Coursetable" parameterType="HashMap">
+        SELECT * FROM coursetable WHERE coursetitle LIKE '%${searchText}%'
+        AND courseprice &gt;= ${minprice}
+        AND courseprice &lt;= ${maxprice}
+        AND  coursesourse in
+        <foreach item="item" collection="searchwebsite"  open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        LIMIT ${curpage}, ${pagesize}
+    </select>
+
+
+
+    <select id="getAllSearchCourseInterValPriceASC" resultType="Coursetable" parameterType="HashMap">
+        SELECT * FROM coursetable WHERE coursetitle LIKE '%${searchText}%'
+        AND courseprice &gt;= ${minprice}
+        AND courseprice &lt;= ${maxprice}
+        AND  coursesourse in
+        <foreach item="item" collection="searchwebsite"  open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        ORDER BY courseprice
+        LIMIT ${curpage}, ${pagesize}
+    </select>
+
+
+    <select id="getAllSearchCourseInterValPriceDES" resultType="Coursetable" parameterType="HashMap">
+        SELECT * FROM coursetable WHERE coursetitle LIKE '%${searchText}%'
+        AND courseprice &gt;= ${minprice}
+        AND courseprice &lt;= ${maxprice}
+        AND  coursesourse in
+        <foreach item="item" collection="searchwebsite"  open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        ORDER BY courseprice DESC
+        LIMIT ${curpage}, ${pagesize}
+    </select>
+
+
+    <select id="getAllSearchCourseInterValPopular" resultType="Coursetable" parameterType="HashMap">
+        SELECT * FROM coursetable WHERE coursetitle LIKE '%${searchText}%'
+        AND courseprice &gt;= ${minprice}
+        AND courseprice &lt;= ${maxprice}
+        AND  coursesourse in
+        <foreach item="item" collection="searchwebsite"  open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        ORDER BY coursenumber DESC
+        LIMIT ${curpage}, ${pagesize}
+    </select>
+
+
+    <select id="getSearchCourseInterValCount" resultType="long" parameterType="HashMap">
+        SELECT COUNT(*) FROM (
+        SELECT * FROM coursetable WHERE coursetitle LIKE '%${searchText}%'
+        AND courseprice &gt;= ${minprice}
+        AND courseprice &lt;= ${maxprice}
+        AND  coursesourse in
+        <foreach item="item" collection="searchwebsite"  open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        ) AS t
+    </select>
+
+
+    <select id="getSearchCourseCount" resultType="long" parameterType="HashMap">
+       SELECT COUNT(*)  FROM
+       (
+        SELECT * FROM coursetable WHERE coursetitle LIKE '%${searchText}%'
+        AND coursesourse in
+        <foreach item="item" collection="searchwebsite"  open="(" separator="," close=")">
+            #{item}
+        </foreach>
+       ) AS t
+    </select>
+
+
+    <select id="getSearchCourseFreeCount" resultType="long" parameterType="Map">
+       SELECT COUNT(*) FROM (
+        SELECT * FROM coursetable WHERE coursetitle LIKE '%${searchText}%' AND courseprice = 0
+        AND  coursesourse in
+        <foreach item="item" collection="searchwebsite"  open="(" separator="," close=")">
+            #{item}
+        </foreach>
+       ) AS t
+    </select>
+
+
+    <select id="getSearchCourseCostCount" resultType="long" parameterType="Map">
+       SELECT COUNT(*) FROM (
+        SELECT * FROM coursetable WHERE coursetitle LIKE '%${searchText}%'
+        AND courseprice &gt; 0
+        AND  coursesourse in
+        <foreach item="item" collection="searchwebsite"  open="(" separator="," close=")">
+            #{item}
+        </foreach>
+       ) AS t
+    </select>
+
+
+
+
+
+</mapper>

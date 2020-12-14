@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.java.mapper.LuntanContentMapper">
+    <insert id="postUserLuntanContent" parameterType="Map">
+        INSERT INTO luntan_content SET who_add=#{who_add},add_time=#{add_time},content=#{content},luntan_name=#{luntan_name}
+    </insert>
+</mapper>

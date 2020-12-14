@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Java_CourseSearch-Backend:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>Java_CourseSearch-Backend</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="ch6_springmvc_2.war">
+      <element id="artifact" artifact-name="Java_CourseSearch-Backend:war exploded" />
+    </root>
+  </artifact>
+</component>

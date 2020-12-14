@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.java.mapper.StarMapper">
+
+    <resultMap id="StarCourse" type="cn.java.bean.Star">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="courseid" column="courseid"/>
+        <association property="coursetable" javaType="cn.java.bean.Coursetable">
+            <id  property="id" column="id"/>
+            <result property="coursetitle" column="coursetitle" />
+            <result property="coursedes" column="coursedes" />
+            <result property="coursevediohref" column="coursevediohref" />
+            <result property="coursesourse" column="coursesourse" />
+            <result property="courseprice" column="courseprice" />
+            <result property="courseimghref" column="courseimghref" />
+            <result property="courselabel" column="courselabel" />
+            <result property="courselevel" column="courselevel" />
+            <result property="coursenumber" column="coursenumber" />
+            <result property="coursetotallabel" column="coursetotallabel" />
+        </association>
+    </resultMap>
+
+
+    <select id="getStarCourse" resultMap="StarCourse">
+       select * from stardatatable,coursetable
+       where stardatatable.courseid = coursetable.id
+       and username=#{username};
+    </select>
+
+    <insert id="insertStarCourse" parameterType="Map">
+        INSERT INTO stardatatable SET username=#{username},courseid=#{courseid}
+    </insert>
+
+    <delete id="deleteStarCourse" parameterType="String">
+       DELETE FROM stardatatable WHERE courseid = #{0}
+    </delete>
+
+
+</mapper>
