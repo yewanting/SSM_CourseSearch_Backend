@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.java.mapper.APPDiscoveryMapper">
+    <select id="getAllSearchCourseFree" resultType="Coursetable" parameterType="String">
+        SELECT * FROM coursetable WHERE  coursetotallabel = #{0} AND courseprice = 0 order by rand()
+    </select>
+
+
+    <select id="getAllSearchCourseFreePopular" resultType="Coursetable" parameterType="String">
+        SELECT * FROM coursetable WHERE coursetotallabel = #{0} AND courseprice = 0
+        ORDER BY coursenumber DESC
+    </select>
+
+    <select id="getAllSearchCourseCost" resultType="Coursetable" parameterType="String">
+        SELECT * FROM coursetable WHERE coursetotallabel = #{0} AND courseprice &gt; 0 order by rand()
+    </select>
+
+
+    <select id="getAllSearchCourseCostPriceASC" resultType="Coursetable" parameterType="String">
+        SELECT * FROM coursetable WHERE coursetotallabel = #{0} AND courseprice &gt; 0
+        ORDER BY courseprice
+    </select>
+
+
+    <select id="getAllSearchCourseCostPriceDESC" resultType="Coursetable" parameterType="String">
+        SELECT * FROM coursetable WHERE coursetotallabel = #{0} AND courseprice &gt; 0
+        ORDER BY courseprice DESC
+    </select>
+
+
+    <select id="getAllSearchCourseCostPopular" resultType="Coursetable" parameterType="String">
+        SELECT * FROM coursetable WHERE coursetotallabel = #{0} AND courseprice &gt; 0
+        ORDER BY coursenumber DESC
+    </select>
+
+</mapper>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.java.mapper.APPCourseMapper">
+    <select id="getAllSearchCourseFree" resultType="Coursetable" parameterType="HashMap">
+        SELECT * FROM coursetable WHERE coursetitle LIKE '%${searchText}%' AND courseprice = 0
+    </select>
+
+
+    <select id="getAllSearchCourseFreePopular" resultType="Coursetable" parameterType="HashMap">
+        SELECT * FROM coursetable WHERE coursetitle LIKE '%${searchText}%' AND courseprice = 0
+        ORDER BY coursenumber DESC
+    </select>
+
+    <select id="getAllSearchCourseCost" resultType="Coursetable" parameterType="HashMap">
+        SELECT * FROM coursetable WHERE coursetitle LIKE '%${searchText}%' AND courseprice &gt; 0
+    </select>
+
+
+    <select id="getAllSearchCourseCostPriceASC" resultType="Coursetable" parameterType="HashMap">
+        SELECT * FROM coursetable WHERE coursetitle LIKE '%${searchText}%' AND courseprice &gt; 0
+        ORDER BY courseprice
+    </select>
+
+
+    <select id="getAllSearchCourseCostPriceDESC" resultType="Coursetable" parameterType="HashMap">
+        SELECT * FROM coursetable WHERE coursetitle LIKE '%${searchText}%' AND courseprice &gt; 0
+        ORDER BY courseprice DESC
+    </select>
+
+
+    <select id="getAllSearchCourseCostPopular" resultType="Coursetable" parameterType="HashMap">
+        SELECT * FROM coursetable WHERE coursetitle LIKE '%${searchText}%' AND courseprice &gt; 0
+        ORDER BY coursenumber DESC
+    </select>
+
+</mapper>
